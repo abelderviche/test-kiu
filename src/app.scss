@@ -18,7 +18,17 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-flow: wrap;
             margin: 10px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .drop-item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border:1px dotted gray;
             &:hover{
                 cursor: pointer;
             }

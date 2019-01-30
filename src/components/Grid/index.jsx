@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import  GridItem  from './GridItem';
+import  {GridItem, GridItemDrop}  from './GridItem';
 import Modal from '../Modal';
+import DragSortableList from 'react-drag-sortable'
 
 const getVowels = string => {
     var counter = string.match(/[aeiou]/gi);
@@ -63,15 +64,19 @@ export default class Grid extends Component {
         })
         
     }
-
+    onSort = (sortedList, dropEvent) =>{
+        console.log(dropEvent);
+    }
   render() {
     let {imagesList,showModal,itemToShow} = this.state;
+    let list = imagesList?imagesList.map(item=>{return({content:(<GridItem onClick={() => this.openModal(item.title,item.url)} key={item.id} minUrl={item.thumbnailUrl} title={item.title}/>),classes:["col-sm-12", "col-md-4", "col-lg-2", "item" ]})}):null;
     return (
       <div className="App__grid container">
             {showModal?<Modal title={itemToShow.title} url={itemToShow.url} handleCloseModal={this.handleCloseModal}/>:null}
             <div className="row">
             {imagesList && imagesList.length > 0? 
-                imagesList.map((item)=><GridItem onClick={() => this.openModal(item.title,item.url)} key={item.id} minUrl={item.thumbnailUrl} title={item.title}/>)
+              //  imagesList.map((item)=><GridItem onClick={() => this.openModal(item.title,item.url)} key={item.id} minUrl={item.thumbnailUrl} title={item.title}/>)
+              <DragSortableList dropBackTransitionDuration={.3} items={list} placeholder={(<GridItemDrop />)} onSort={this.onSort} type="grid"/>
             :'Cargando...'}
             </div>
       </div>
