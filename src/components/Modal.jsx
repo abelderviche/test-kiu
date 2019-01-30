@@ -6,8 +6,8 @@ export default class Modal extends Component {
     return (
     <div className="modal" onClick={handleCloseModal}>
         <div className="modal__box">
-            Title: {title}
-            url: {url}
+            <div className="title">{title}</div>
+            <img src={url} alt={title}/>
         </div>
     </div>
     )

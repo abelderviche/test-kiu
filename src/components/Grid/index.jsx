@@ -49,7 +49,7 @@ export default class Grid extends Component {
     
     
     componentDidMount(){
-       /* fetch("https://jsonplaceholder.typicode.com/photos?albumId=1")
+        fetch("https://jsonplaceholder.typicode.com/photos?albumId=1")
         .then(response=>{
             return response.json();
         })
@@ -60,18 +60,20 @@ export default class Grid extends Component {
             this.setState({
                 imagesList:jsonResponse
             })
-        })*/
+        })
         
     }
 
   render() {
     let {imagesList,showModal,itemToShow} = this.state;
     return (
-      <div className="App__grid">
+      <div className="App__grid container">
             {showModal?<Modal title={itemToShow.title} url={itemToShow.url} handleCloseModal={this.handleCloseModal}/>:null}
+            <div className="row">
             {imagesList && imagesList.length > 0? 
                 imagesList.map((item)=><GridItem onClick={() => this.openModal(item.title,item.url)}key={item.id} minUrl={item.thumbnailUrl} title={item.title}/>)
             :'Cargando...'}
+            </div>
       </div>
     )
   }
